@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function urlEncodeFormData(form) {
+      let inputValues = {};
+      Array.from(form.elements).forEach(element => {
+        if (element.type !== 'submit') {
+          inputValues[element.name] = element.value;
+        }
+      });
+      return Object.entries(inputValues).map(([name, value]) => {
+        let encodedName = encodeURIComponent(name);
+        let encodedValue = encodeURIComponent(value);
+        return `${encodedName}=${encodedValue}`;
+      }).join('&');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let form = document.querySelector('form');
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        let data = urlEncodeFormData(form);
+        let request = new XMLHttpRequest();
+        request.open('POST', '/api/staff_members');
+        request.responseType = 'json';
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+        request.addEventListener('load', () => {
+          let response = request.response;
+          if (response) {
+            alert(`Staff created with id ${response.id}`);
+          } else {
+            alert(`Couldn't add staff. Check your inputs.`);
+          }
+        });
+        request.send(data);
+      });
+    });
+  </script>
+</head>
+<body>
+  <form method="post" action="#">
+    <label for="email">Email:</label>
+    <input id="email" name="email" type="text">
+    <label for="name">Name:</label>
+    <input id="name" name="name" type="text">
+    <button type="submit">submit</button>
+  </form>
+</body>
+</html>

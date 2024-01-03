@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    let nextScheduleNumber = 2;
+    function addNewScheduleForm() {
+      let schedule = document.querySelector('form .schedule');
+      let newSchedule = schedule.cloneNode(deep = true);
+      let scheduleNumber = newSchedule.querySelector('.schedule-number');
+      scheduleNumber.textContent = nextScheduleNumber;
+      nextScheduleNumber += 1;
+      schedule.parentNode.appendChild(newSchedule);
+    }
+
+    function populateStaffSelectors() {
+      function addOptions(staff) {
+        let staffSelects = document.querySelectorAll("form .staff-name-select");
+        staffSelects.forEach(select => {
+          staff.forEach(staffMember => {
+            let newOptionNode = document.createElement('option');
+            newOptionNode.textContent = staffMember.name;
+            newOptionNode.setAttribute('staff_id', staffMember.id);
+            select.appendChild(newOptionNode);
+          });
+        });
+      }
+      let allStaffRequest = new XMLHttpRequest();
+      allStaffRequest.open('GET', '/api/staff_members');
+      allStaffRequest.responseType = 'json';
+      allStaffRequest.addEventListener('load', () => {
+        addOptions(allStaffRequest.response);
+      });
+      allStaffRequest.send();
+    }
+
+    function scheduleToJSON(schedule) {
+      let json = {};
+      let inputElements = schedule.querySelectorAll('.schedule-input');
+      Array.from(inputElements).forEach(element => {
+        if (element instanceof HTMLInputElement) {
+          json[element.name] = element.value;
+        } else if (element instanceof HTMLSelectElement) {
+          let selectedOption = element.options[element.selectedIndex];
+          json['staff_id'] = Number(selectedOption.getAttribute('staff_id'));
+        }
+      });
+      return json;
+    }
+
+    function submitForm(event) {
+      event.preventDefault();
+      let form = document.querySelector('form');
+      let json = {schedules: []};
+      Array.from(form.children).forEach(schedule => {
+        if (schedule.type !== 'submit') {
+          json['schedules'].push(scheduleToJSON(schedule));
+        }
+      });
+      let request = new XMLHttpRequest();
+      request.open('POST', '/api/schedules');
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.addEventListener('load', () => {
+        alert(request.response);
+      })
+      console.log(json);
+      request.send(JSON.stringify(json));
+    }
+
+    function addListeners() {
+      let newScheduleButton = document.querySelector('#new-schedule-button');
+      let form = document.querySelector('form');
+      newScheduleButton.addEventListener('click', addNewScheduleForm);
+      form.addEventListener('submit', submitForm);
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      populateStaffSelectors();
+      addListeners();
+    })
+  </script>
+</head>
+<body>
+  <button id = "new-schedule-button">Add more schedules</button>
+  <form>
+    <div class="schedule">
+      <div>
+        <h3>Schedule <span class="schedule-number">1</span></h3>
+        <label>Staff Name:</label>
+        <select name="staff-name" class="staff-name-select schedule-input"></select>
+      </div>
+      <div>
+        <label>Date:</label>
+        <input name="date" class="schedule-input">
+      </div>
+      <div>
+        <label>Time:</label>
+        <input name="time" class="schedule-input">
+      </div>
+    </div>
+    <button type="submit" id="form-submit-button">Submit</button>
+  </form>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="dialog-box" class="invisible">
+    <p>Are you sure you want to delete that item?</p>
+    <div class="buttons">
+      <button id="yes-button">Yes</button>
+      <button id="no-button">No</button>
+    </div>
+  </div>
+  <ul id="todo-list"></ul>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+  <script type="text/x-handlebars-template" id="todo-list-template">
+    {{#each this}}
+      <li data-id="{{id}}">
+        {{title}}
+        <button>Delete</button>
+      </li>
+    {{/each}}
+  </script>
+</body>
+</html>

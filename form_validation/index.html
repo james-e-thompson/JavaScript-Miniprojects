@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <form novalidate>
+    <p class="formError invisible">Fix errors before submitting the form.</p>
+    <fieldset>
+      <div class="inputGroup">
+        <label>First name</label>
+        <input type="text" name="firstName" required data-char-pattern="[a-zA-Z'\s]">
+        <label class="invisible inputError"></label>
+      </div>
+      <div class="inputGroup">
+        <label>Last name</label>
+        <input type="text" name="lastName" required data-char-pattern="[a-zA-Z'\s]">
+        <label class="invisible inputError"></label>
+      </div>
+      <div class="inputGroup">
+        <label>Password</label>
+        <input type="password" name="password" required minlength="10">
+        <label class="invisible inputError"></label>
+      </div>
+      <div class="inputGroup">
+        <label>Email</label>
+        <input type="email" name="email" required pattern=".+@.+">
+        <label class="invisible inputError"></label>
+      </div>
+      <div class="inputGroup">
+        <label>Phone number</label>
+        <input type="text" name="phoneNumber" pattern="\d{3}-\d{3}-\d{4}" data-char-pattern="[\d-]">
+        <label class="invisible inputError"></label>
+      </div>
+      <div class="inputGroup" id="creditCardInputGroup">
+        <label>Credit card number</label>
+        <input type="text" maxlength="4" name="creditCardNumber" pattern="\d{4}" data-char-pattern="[\d]">-
+        <input type="text" maxlength="4" name="creditCardNumber" pattern="\d{4}" data-char-pattern="[\d]">-
+        <input type="text" maxlength="4" name="creditCardNumber" pattern="\d{4}" data-char-pattern="[\d]">-
+        <input type="text" maxlength="4" name="creditCardNumber" pattern="\d{4}" data-char-pattern="[\d]" class = "last" >
+        <label class="invisible inputError"></label>
+      </div>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    </fieldset>
+  </form>
+  <div>
+    <h3>Serialized Form</h3>
+    <p id="formData"></p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src = "javascripts/exercise4.js"></script>
+  <style>
+    .invisible {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Schedules</h1>
+  <form id = "schedule-form">
+    <fieldset>
+      <div>
+        <label>Please select one schedule:</label>
+        <select name="schedule">
+        </select>
+        <label>Email: </label>
+        <input name="email">
+      </div>
+      <button type="submit">Submit</button>
+    </fieldset>
+  </form>
+  <div id = "student-input" class="invisible">
+    <h1>Please provide new student details</h1>
+    <form id = "student-form">
+      <fieldset>
+        <div>
+          <label>Email: </label>
+          <input type="text" name="email">
+        </div>
+        <div>
+          <label>Name: </label>
+          <input type="text" name="name">
+        </div>
+        <div>
+          <label>Booking Sequence: </label>
+          <input type="text" name="booking-sequence">
+        </div>
+        <button type="submit">Submit</button>
+      </fieldset>
+    </form>
+  </div>
+</body>
+</html>

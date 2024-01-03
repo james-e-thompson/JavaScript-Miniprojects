@@ -1,0 +1,17 @@
+#car-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#car-box > div {
+  margin: 0 1rem;
+}
+
+#car-box img {
+  display: block;
+  width: 10rem;
+}
+
+#car-box button {
+  display: block;
+}

@@ -1,0 +1,20 @@
+.invisible {
+  display: none;
+}
+
+.buttons {
+  margin: 0 auto;
+  width: max-content;
+}
+
+#dialog-box {
+  position: absolute;
+  background-color: gray;
+  border-radius: 1rem;
+  text-align: center;
+  padding: 5px;
+  width: 20rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

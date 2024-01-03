@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function staffScheduleCount() {
+      let request = new XMLHttpRequest();
+      request.open('GET', '/api/schedules');
+      request.responseType = 'json';
+      //request.timeout = 7000;
+      request.addEventListener('load', () => {
+        let counts = {};
+        request.response.forEach(schedule => {
+          let staffId = schedule.staff_id
+          if (!Object.keys(counts).includes(String(staffId))) {
+            counts[staffId] = 0;
+          }
+          counts[staffId] += 1;
+        });
+        Object.entries(counts).forEach(([staffId, count]) => {
+          console.log(`staff ${staffId}: ${count}`);
+        });
+      });
+      request.addEventListener('timeout', () => {
+        console.log('The request timed out. Try again.');
+      });
+      request.send();
+    }
+    staffScheduleCount();
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

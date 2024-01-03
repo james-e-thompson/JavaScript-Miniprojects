@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script
+			  src="https://code.jquery.com/jquery-3.7.0.min.js"
+			  integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+			  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+  <script id="posts" type="text/x-handlebars">
+    <article>
+      {{#each this}}
+        <h1>{{{title}}}</h1>
+        <p><time>Posted on {{published}}</time></p>
+        {{body}}
+        {{#if tags}}
+          <ul>
+          {{#each tags}}
+            {{> tagTemplate}}
+          {{/each}}
+          </ul>
+        {{else}}
+          <p>This post has no tags</p>
+        {{/if}}
+      {{/each}}
+    </article>
+  </script>
+
+  <script id="tag" type="text/x-handlebars">
+    <li>{{name}}</li>
+  </script>
+
+  <script>
+    let posts = [{
+      title: 'Lorem ipsum dolor <strong>sit</strong> amet',
+      published: 'April 1, 2015',
+      body: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.',
+      tags: [{name: 'locom'},
+        {name: 'olim'},
+        {name: 'sotor'},],
+    },
+    {
+      title: 'Test post',
+      published: 'May',
+      body: 'hi',
+    }];
+    let postsTemplate = Handlebars.compile($('#posts').html());
+    let tagTemplate = Handlebars.compile($('#tag').html());
+    Handlebars.registerPartial('tagTemplate', $('#tag').html());
+    $(function() {
+      $(document.body).html(postsTemplate(posts));
+    });
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

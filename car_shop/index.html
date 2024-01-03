@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <form>
+  </form>
+  <div id="car-box">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+  <script id = "form-template" type="text/x-handlebars-template">
+    <form>
+      {{#each this}}
+        <label>
+          {{name}}
+          {{> select}}
+        </label>
+      {{/each}}
+      <button type="submit">Filter</button>
+    </form>
+  </script>
+  <script id="select-template" type="text/x-handlebars-template">
+    <select name="{{name}}">
+      {{#each values}}
+        <option value="{{this}}">{{this}}</option>
+      {{/each}}
+    </select>
+  </script>
+  <script id = "car-info-template" type="text/x-handlebars-template">
+    {{#each this}}
+      <div>
+        <p>{{make}} {{model}}</p>
+        <img src="{{image}}">
+        <p>Year: {{year}}</p>
+        <button>Buy</button>
+      </div>
+    {{/each}}
+  </script>
+</body>
+</html>

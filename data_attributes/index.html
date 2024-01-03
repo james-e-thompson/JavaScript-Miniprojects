@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    article + article {
+      visibility: hidden;
+    }
+  </style>
+  <script
+  src="https://code.jquery.com/jquery-3.7.0.min.js"
+  integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+  crossorigin="anonymous"></script>
+  <script>
+    $(function() {
+      $('ul').on('click', event => {
+        event.preventDefault();
+        $('article').css('visibility', 'hidden');
+        let target = $(event.target);
+        let block = target.data('block');
+        console.log(block);
+        $(`article[data-block=${block}]`).css('visibility', 'visible');
+      });
+    });
+  </script>
+</head>
+<body>
+  <ul>
+    <li><a href="#" data-block="gold">Gold Sponsors</a></li>
+    <li><a href="#" data-block="silver">Silver Sponsors</a></li>
+    <li><a href="#" data-block="bronze">Bronze Sponsors</a></li>
+  </ul>
+
+  <article data-block="gold">
+    <h1>Gold Sponsors</h1>
+  </article>
+
+  <article data-block="silver">
+    <h1>Silver Sponsors</h1>
+  </article>
+
+  <article data-block="bronze">
+    <h1>Bronze Sponsors</h1>
+  </article>
+</body>
+</html>

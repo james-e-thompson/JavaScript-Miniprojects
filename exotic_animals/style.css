@@ -1,0 +1,18 @@
+#gallery {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#gallery figure{
+  width: 20%;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+
+#gallery figure img {
+  width: 100%;
+}
+
+#gallery figure:not(.selected) figcaption {
+  display: none;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiple Choice Quiz</title>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <form>
+    <div id="questions"></div>
+    <button type="submit" id="submit-button">Submit</button>
+    <button type="button" id="reset-button">Reset</button>
+  </form>
+  <script type="text/x-handlebars" id="question-template">
+    <div class="question-box" data-question-id="{{id}}">
+      <fieldset>
+        <legend>{{{description}}}</legend>
+          <label>
+            <input type="radio" name="question-{{id}}" value="{{options.[0]}}">
+            {{options.[0]}}
+          </label>
+          <label>
+            <input type="radio" name="question-{{id}}" value="{{options.[1]}}">
+            {{options.[1]}}
+          </label>
+          <label>
+            <input type="radio" name="question-{{id}}" value="{{options.[2]}}">
+            {{options.[2]}}
+          </label>
+          <label>
+            <input type="radio" name="question-{{id}}" value="{{options.[3]}}">
+            {{options.[3]}}
+          </label>
+      </fieldset>
+      <div class="feedback">
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" id="questions-template">
+    {{#each questions}}
+      {{> question}}
+    {{/each}}
+  </script>
+
+  <script type="text/x-handlebars" id="feedback-template">
+    {{#if correctAnswer}}
+      <div class="incorrect">That's incorrect. The correct answer is: {{correctAnswer}}</div>
+    {{else}}
+      <div class="correct">That's correct!</div>
+    {{/if}}
+  </script>
+</body>
+</html>

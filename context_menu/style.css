@@ -1,0 +1,42 @@
+.invisible {
+  display: none;
+}
+
+.buttons {
+  margin: 0 auto;
+  width: max-content;
+}
+
+#dialog-box {
+  position: absolute;
+  background-color: gray;
+  border-radius: 1rem;
+  text-align: center;
+  padding: 5px;
+  width: 20rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#context-menu {
+  position: absolute;
+  background-color: gray;
+}
+
+#context-menu ul {
+  list-style: none;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+}
+
+#context-menu li {
+  border: 1px solid black;
+  padding: 0 0.5rem;
+}
+
+#context-menu li.selected {
+  background-color: white;
+  color: black;
+}
